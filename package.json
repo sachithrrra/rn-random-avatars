@@ -37,7 +37,7 @@
   "type": "module",
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --dts --external react,react-native,@shopify/react-native-skia",
-    "lint": "eslint ."
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@shopify/react-native-skia": ">=1.0.0",
