@@ -1,0 +1,53 @@
+{
+  "name": "rn-random-avatars",
+  "description": "React Native avatar generator, deterministic and colorful, rendered with Skia from any username and color palette.",
+  "homepage": "https://github.com/sachithrrra/rn-random-avatars",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachithrrra/rn-random-avatars"
+  },
+  "bugs": {
+    "url": "https://github.com/sachithrrra/rn-random-avatars/issues"
+  },
+  "keywords": [
+    "avatar",
+    "react-native",
+    "expo",
+    "skia",
+    "gravatar",
+    "profile picture",
+    "avatar generator",
+    "avatar placeholder"
+  ],
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react,react-native,@shopify/react-native-skia",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "@shopify/react-native-skia": ">=1.0.0",
+    "react": ">=18.0.0",
+    "react-native": ">=0.73.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-native": "^0.73.0",
+    "tsup": "^8.5.1",
+    "typescript": "5.6"
+  }
+}
