@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Blur, Group, Path, Rect } from '@shopify/react-native-skia';
+import { Blur, Group, Paint, Path, Rect } from '@shopify/react-native-skia';
 import { hashCode, getUnit, getRandomColor } from '../utilities';
 import type { AvatarProps } from './types';
 import { AvatarCanvas } from './avatar-canvas';
@@ -29,8 +29,13 @@ const AvatarMarble = ({ name, colors, title = false, square = false, size = 40, 
     <AvatarCanvas nativeSize={SIZE} size={size} square={square} title={title} name={name} style={style}>
       <Rect x={0} y={0} width={SIZE} height={SIZE} color={properties[0].color} />
 
-      <Group>
-        <Blur blur={7} />
+      <Group
+        layer={
+          <Paint>
+            <Blur blur={7} />
+          </Paint>
+        }
+      >
         <Transformed
           translateX={properties[1].translateX}
           translateY={properties[1].translateY}
@@ -45,8 +50,13 @@ const AvatarMarble = ({ name, colors, title = false, square = false, size = 40, 
         </Transformed>
       </Group>
 
-      <Group blendMode="overlay">
-        <Blur blur={7} />
+      <Group
+        layer={
+          <Paint blendMode="overlay">
+            <Blur blur={7} />
+          </Paint>
+        }
+      >
         <Transformed
           translateX={properties[2].translateX}
           translateY={properties[2].translateY}

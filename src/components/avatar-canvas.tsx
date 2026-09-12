@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
-import { Canvas, Group, Mask, RoundedRect } from '@shopify/react-native-skia';
+import { Canvas, Group, rect, rrect } from '@shopify/react-native-skia';
 
 type AvatarCanvasProps = {
   /** Coordinate space every child shape is drawn in (e.g. 36, 80, 90 to match upstream). */
@@ -25,6 +25,8 @@ export function AvatarCanvas({
   children,
 }: AvatarCanvasProps) {
   const scale = size / nativeSize;
+  const radius = square ? 0 : nativeSize / 2;
+  const clip = rrect(rect(0, 0, nativeSize, nativeSize), radius, radius);
 
   return (
     <View
@@ -33,23 +35,9 @@ export function AvatarCanvas({
       accessibilityRole={title ? 'image' : undefined}
       accessibilityLabel={title ? name : undefined}
     >
-      <Canvas style={{ width: size, height: size }}>
-        <Group transform={[{ scale }]}>
-          <Mask
-            mode="alpha"
-            mask={
-              <RoundedRect
-                x={0}
-                y={0}
-                width={nativeSize}
-                height={nativeSize}
-                r={square ? 0 : nativeSize}
-                color="white"
-              />
-            }
-          >
-            {children}
-          </Mask>
+      <Canvas style={{ width: size, height: size }} opaque={false}>
+        <Group transform={[{ scale }]} clip={clip}>
+          {children}
         </Group>
       </Canvas>
     </View>
